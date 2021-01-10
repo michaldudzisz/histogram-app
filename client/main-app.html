@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+<html ng-app="Histogram">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <title> Histogram App1 </title>
+
+        <script src="{{ STATIC_URL }}angular.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}app-modules.js" data-cover></script>
+        
+    </head>
+
+    <body>
+        Siemano. Jestem w folderze client
+        <br>
+        STATIC_URL: {{ STATIC_URL }}
+        <br>
+        <br>
+
+        <div ng-controller="codeController">
+            <input type="text" onchange="angular.element(this).scope().pole()" id="text-pole">
+            <br>
+            <div id="wiadomosc"></div>
+        </div>
+
+        
+
+    </body>
+</html>
