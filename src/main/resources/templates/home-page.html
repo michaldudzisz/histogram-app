@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Histogram App</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+
+<script th:if="${histogram != null}" th:inline="javascript">const lists = [[${histogram}]];</script>
+<script th:if="${histogram != null}" src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
+<script th:inline="javascript" type="text/javascript" th:src="@{/scripts/image-validation.js}"></script>
+
+<link rel="stylesheet" href="/styles/homepage.css">
+
+<body>
+
+
+<div class="upload-form-wrapper">
+    <h2><span class="title"> Upload your image here </span></h2>
+
+    <form method="POST"
+          action="/histogram-app"
+          enctype="multipart/form-data">
+        <table class="file-input-table">
+            <tr>
+                <td>Author (optional)</td>
+                <td class="with-input"><input type="text" id="author-input" name="author"
+                                              onchange="AuthorValidation()"/></td>
+            </tr>
+            <tr>
+                <td>Description (optional)</td>
+                <td class="with-input"><input type="text" id="description-input" name="description"
+                                              onchange="DescriptionValidation()"/></td>
+            </tr>
+            <tr>
+                <td>Select a file to upload</td>
+                <td class="with-input"><input type="file" id="image-input" name="file" onchange="ImageValidation()"/>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="reset" value="Reset"/></td>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <div th:if="${message != null}">
+        [[${message}]]
+    </div>
+</div>
+
+<div th:if="${histogram != null}" id="chartDiv" style="width:50%; height:300px; margin:0 auto;"></div>
+
+<div class="file-list-wrapper">
+    <h2>Last uploaded images</h2>
+    <span th:if="${#lists.isEmpty(uploadedImages)}">No images uploaded yet!</span>
+    <div th:unless="${#lists.isEmpty(uploadedImages)}">
+        <table class="file-list-table">
+            <tr>
+                <th>File name</th>
+                <th>Author</th>
+                <th>Uploaded</th>
+                <th>View</th>
+                <th>Calculate</th>
+            </tr>
+            <tr th:each="image : ${uploadedImages}" class="file-row-wrapper">
+                <td class="file-table-element" th:text="${image.filename}">Author</td>
+                <td class="file-table-element" th:text="${image.author}">File name</td>
+                <td class="file-table-element" th:text="${#dates.format(image.uploaded, 'dd.MM.yyyy HH:mm')}">
+                    Uploaded
+                </td>
+                <td class="file-table-element"><a th:href="@{'/histogram-app/images/' + ${image.id}}">View</a></td>
+                <td class="file-table-element"><a th:href="@{'/histogram-app/calc/' + ${image.id}}">Go!</a></td>
+                <td class="bin"><img src="/images/bin.jpg" alt="bin"
+                                     th:attr="onclick=|sendDeleteImage('@{'/histogram-app/images/' + ${image.id}}')|">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script th:if="${histogram != null}" th:inline="javascript" type="text/javascript"
+        th:src="@{/scripts/histogram-chart.js}"></script>
+</body>
+
+</html>

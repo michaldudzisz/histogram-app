@@ -1,0 +1,68 @@
+body {
+    font-family: verdana;
+    font-size: 12px;
+}
+
+.file-input-table {
+    margin: auto;
+}
+
+.upload-form-wrapper {
+    background-color: white;
+    text-align: center;
+    max-width: 560px;
+    border: 3px solid green;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 30px auto 20px auto;
+}
+
+.file-list-wrapper {
+    margin: auto;
+    background-color: white;
+    text-align: center;
+    padding-bottom: 30px;
+    margin: 20px auto 20px auto;
+    max-width: 760px;
+}
+
+.file-list-table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.table-legend {
+    margin: auto;
+}
+
+.file-list-table th {
+    background-color: #fcfcfc;
+    border: 1px solid #ddd;
+    padding: 6px;
+}
+
+.file-table-element {
+    background-color: #fefefe;
+    padding: 6px;
+    min-width: 120px;
+    border: 1px solid #ddd;
+}
+
+.with-input {
+    text-align: left;
+    padding-left: 70px;
+}
+
+.bin {
+    max-width: 90px;
+    text-align: left;
+    padding: 0px 0px 0px 5px;
+}
+
+.bin img {
+    position: absolute;
+    width: 20px;
+    margin: -10px 0px 0px 0px;
+    cursor:pointer;
+}
