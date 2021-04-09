@@ -44,6 +44,7 @@ public class ImageService {
     public void saveFromFormParams(MultipartFile file, String author, String description)
             throws IOException, SQLException {
         ImageInfo image = ImageInfo.fromFormParams(file, author, description);
+        image.setUploaded(new Timestamp(roundMilsToSeconds(System.currentTimeMillis())));
         imageRepository.save(image);
     }
 
